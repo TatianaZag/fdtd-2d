@@ -157,7 +157,7 @@ int main(int argc, char** argv)
   double (*_fict_)[tmax];
   _fict_ = (double(*)[tmax])malloc ((tmax) * sizeof(double));
 
-#pragma omp parallel num_threads(4)
+#pragma omp parallel num_threads(20)
 #pragma omp single
 {
   #pragma omp task
