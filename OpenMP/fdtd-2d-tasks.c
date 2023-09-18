@@ -158,7 +158,7 @@ int main(int argc, char** argv)
   _fict_ = (double(*)[tmax])malloc ((tmax) * sizeof(double));
 
 #pragma omp parallel num_threads(20)
-#pragma omp single
+#pragma omp taskgroup
 {
   #pragma omp task
   init_array (tmax, nx, ny,
@@ -166,11 +166,12 @@ int main(int argc, char** argv)
        *ey,
        *hz,
        *_fict_);
-       
-  #pragma omp taskwait
+}       
 
   bench_timer_start();
-  
+
+#pragma omp taskgroup
+{  
   #pragma omp task
   kernel_fdtd_2d (tmax, nx, ny,
     *ex,
