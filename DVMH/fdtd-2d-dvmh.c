@@ -108,7 +108,6 @@ void kernel_fdtd_2d(int tmax,
 
   for(t = 0; t < tmax; t++)
     {
-
 #pragma dvm region
 {
 #pragma dvm parallel([j] on ex[0][j])
